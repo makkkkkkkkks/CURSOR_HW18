@@ -1,22 +1,24 @@
 package com.company.makkkkkkkks.service;
 
+import com.company.makkkkkkkks.entity.Books;
 import com.company.makkkkkkkks.entity.User;
 import com.company.makkkkkkkks.repository.BookRepository;
 import com.company.makkkkkkkks.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.awt.print.Book;
+import java.util.List;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    /*@Autowired
-    private BookRepository bookRepository;*/
+    @Autowired
+    private BookRepository bookRepository;
 
     public User getUserById(Long id) {
-        return userRepository.getUserById(1l);
+        return userRepository.getUserById(id);
     }
 
     public boolean addUser(String name) {
@@ -24,6 +26,15 @@ public class UserService {
         user.setName(name);
         userRepository.createUser(user);
         return true;
+    }
+
+    public void addBookToUser(Long id, String bookName) {
+        User user = getUserById(id);
+        System.out.println(user);
+        Books bookAdd = new Books();
+        bookAdd.setName(bookName);
+        bookAdd.setOwner(user);
+        bookRepository.createBooks(bookAdd);
     }
 
     public List<User> findAllUser() {
@@ -42,5 +53,9 @@ public class UserService {
 
     public void deleteUser(Long id) {
         userRepository.deleteUser(id);
+    }
+
+    public List<Books> findeAllBooks(Long id) {
+        return getUserById(id).getBookList();
     }
 }

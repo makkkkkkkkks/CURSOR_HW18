@@ -11,7 +11,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-       var annotationConfigApplicationContext
+        var annotationConfigApplicationContext
                 = new AnnotationConfigApplicationContext(Config.class);
 
         Menu menu = annotationConfigApplicationContext.getBean(Menu.class);

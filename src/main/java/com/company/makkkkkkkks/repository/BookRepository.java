@@ -20,16 +20,16 @@ public class BookRepository {
     }
 
     public Books getBooksById(Long id) {
-        return (Books) getCurrentSession().createQuery("SELECT u From Books u WHERE id = " + id, Books.class).
-                list().get(0); //HQL - Hibernate query lang.
+        return getCurrentSession().createQuery("SELECT u From Books u WHERE id = " + id, Books.class).
+                list().get(0);
     }
 
     public void deleteBooks(Long id) {
         getCurrentSession().delete(getBooksById(id));
     }
 
-    public List<Books> showAllBooks() {
-        return getCurrentSession().createQuery("SELECT u From Books u", Books.class).getResultList();
+    public List<Books> showAllBooks(Long id) {
+        return getCurrentSession().createQuery("SELECT b From Books b WHERE Books.owner=" + id, Books.class).getResultList();
     }
 
     public boolean updateBooks(Books books) {

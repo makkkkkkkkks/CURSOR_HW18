@@ -22,9 +22,8 @@ public class Menu {
                     "3. Update user" + "\n" +
                     "4. Find user by id" + "\n" +
                     "5. Find all user" + "\n" +
-                    "6. Find all books" + "\n" +
-                    "7. Find all user boos by id" + "\n" +
-                    "8. Add book to user" + "\n" +
+                    "6. Find all books by id" + "\n" +
+                    "7. Add book to user" + "\n" +
                     "0. Exit";
 
     @Autowired
@@ -43,9 +42,8 @@ public class Menu {
                 case "3" -> updateUser();
                 case "4" -> findUserById();
                 case "5" -> findAllUsers();
-                case "6" -> findAllBooks();
-                case "7" -> System.out.println(7);
-                case "8" -> addBookToUser();
+                case "6" -> findAllUserBooks();
+                case "7" -> addBookToUser();
                 case "0" -> System.exit(0);
             }
         }
@@ -84,7 +82,7 @@ public class Menu {
         Long id = sc.nextLong();
         System.out.println("enter book name ->");
         String name = sc.next();
-
+        userService.addBookToUser(id, name);
     }
 
     private void deleteBookByid() {
@@ -97,16 +95,10 @@ public class Menu {
         return bookService.getBookById(sc.nextLong());
     }
 
-    private void updateBook() {
-        System.out.println("Book id ->  ");
+    private void findAllUserBooks() {
+        System.out.println("Owner id ->  ");
         Long id = sc.nextLong();
-        System.out.println("New book name ->  ");
-        String name = sc.next();
-        System.out.println(name);
-    }
-
-    private void findAllBooks() {
-        bookService.findAllBooks().forEach(b -> System.out.println(b));
+        userService.findeAllBooks(id).forEach(System.out::println);
     }
 
 }

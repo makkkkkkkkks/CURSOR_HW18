@@ -23,8 +23,8 @@ public class BookService {
         return true;
     }
 
-    public List<Books> findAllBooks() {
-        return bookRepository.showAllBooks();
+    public List<Books> findAllBooks(Long id) {
+        return bookRepository.showAllBooks(id);
     }
 
     public boolean updateBook(Long id, String name) {

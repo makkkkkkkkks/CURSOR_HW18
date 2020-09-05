@@ -5,10 +5,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserRepository {
 
     @Autowired
@@ -26,7 +29,7 @@ public class UserRepository {
 
     public void deleteUser(Long id) {
         getCurrentSession().delete(getUserById(id));
-    }
+           }
 
     public List<User> showAllUsers() {
         return getCurrentSession().createQuery("SELECT u From User u", User.class).getResultList();
@@ -37,8 +40,10 @@ public class UserRepository {
         return true;
     }
 
+
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
+
 
 }

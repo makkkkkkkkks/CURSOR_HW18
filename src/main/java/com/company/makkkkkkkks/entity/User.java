@@ -29,7 +29,7 @@ public class User {
         this.bookList = bookList;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "owner")
     private List<Books> bookList;
 
